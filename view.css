@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/* styles.css */
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  margin-bottom: 5px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.col-md-4 {
+  width: calc(33.33% - 20px);
+  margin-bottom: 20px;
+}

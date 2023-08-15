@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Bất động sản</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../cssuser/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        .conteudo {
+            display: flex;
+            width: 350px;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 25px;
+            column-gap: 20px;
+        }
+        
+        .card {
+            flex: 0 0 100%;
+            padding: 30px;
+            scroll-snap-align: start;
+            border-radius: 30px;
+            height: 250px;
+        }
+        
+        .card h1 {
+            margin-bottom: 2rem;
+        }
+        
+        .card:nth-child(1) {
+            background: linear-gradient(-229deg, #FBAB7E, #F7CE68);
+        }
+        
+        .card:nth-child(2) {
+            background: linear-gradient(-229deg, #0093E9, #80D0C7);
+        }
+        
+        .card:nth-child(3) {
+            background: linear-gradient(-229deg, #50d990, #d4d054);
+        }
+        
+        .card:nth-child(4) {
+            background: linear-gradient(-229deg, #D9AFD9, #97D9E1);
+        }
+    </style>
+</head>
+
+<body ng-app="shopping-cart" ng-controller="ctrl">
+    <header>
+        <!--menu-->
+        <div th:replace="/user/layout/_menu.html"></div>
+    </header>
+    <br>
+    <hr>
+
+    <section class="hero">
+        <div th:replace="/user/layout/_filter.html"></div>
+    </section>
+
+
+
+    <section class="featured-projects">
+        <div th:replace="/user/layout/_product.html"></div>
+    </section>
+
+    <!-- Mã HTML và CSS cho chức năng nhắn tin -->
+    <button id="open-chat" class="floating-chat-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            fill="currentColor" class="bi bi-chat-quote-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM7.194 6.766a1.688 1.688 0 0 0-.227-.272 1.467 1.467 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 5.734 6C4.776 6 4 6.746 4 7.667c0 .92.776 1.666 1.734 1.666.343 0 .662-.095.931-.26-.137.389-.39.804-.81 1.22a.405.405 0 0 0 .011.59c.173.16.447.155.614-.01 1.334-1.329 1.37-2.758.941-3.706a2.461 2.461 0 0 0-.227-.4zM11 9.073c-.136.389-.39.804-.81 1.22a.405.405 0 0 0 .012.59c.172.16.446.155.613-.01 1.334-1.329 1.37-2.758.942-3.706a2.466 2.466 0 0 0-.228-.4 1.686 1.686 0 0 0-.227-.273 1.466 1.466 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 10.07 6c-.957 0-1.734.746-1.734 1.667 0 .92.777 1.666 1.734 1.666.343 0 .662-.095.931-.26z" />
+        </svg> Chat
+    </button>
+
+    <div id="chat-widget" class="hidden">
+        <div id="chat-header">
+            <h3>Chat</h3>
+            <button id="chat-close"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                    class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg></button>
+        </div>
+        <div id="chat-body">
+            <ul id="chat-messages"></ul>
+        </div>
+        <div id="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type your message" />
+            <button id="chat-send">Gửi</button>
+        </div>
+    </div>
+
+
+    <!-- ---------TAB Tin tức-------------------------------- -->
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'tab5')">Tin tức nổi bậc</button>
+        <button class="tablinks" onclick="openTab(event, 'tab6')">BĐS TP.HCM</button>
+        <button class="tablinks" onclick="openTab(event, 'tab7')">BĐS Hà Nội</button>
+    </div>
+
+    <div id="tab5" class="tabcontent active">
+        <div class="news-container">
+            <div class="news-item">
+                <img src="https://assets.savills.com/properties/SG4000050333/ac0a7ee46eaa4161ab9b39a9c8e82e0e-wtm_l_lis.jpg" alt="News 1" class="img-fluid">
+                <a href="https://batdongsan.com.vn/tin-tuc/nghi-quyet-33-da-thay-doi-thi-truong-bat-dong-san-ra-sao-cd-hn-775947">Chủ BĐS đang chiều người mua nhà hết mức</a>
+            </div>
+            <hr>
+            <div class="news-item">
+                <img src="https://assets.savills.com/properties/SG4000050333/Beverly%20Hill%20Apartment%20IMG_8706_l_lis.jpg" alt="News 2" class="img-fluid">
+                <a href="https://batdongsan.com.vn/tin-tuc/gia-dat-nam-2023-co-giam-sau-nhu-dan-dau-tu-ky-vong-776228">Đất nền vẫn là kênh đầu tư được ưa chuộn nhất</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="tab6" class="tabcontent">
+        <div class="news-container">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://assets.savills.com/properties/SG4000050189/SmartSelect_20220321-223538_WhatsAppBusiness_l_lis.jpg" class="d-block img-fluid" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://assets.savills.com/properties/SG4103050193/bdd0423021e041f4a102a6c24d9e8a8e-wtm_l_lis.jpg" class="d-block img-fluid" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://assets.savills.com/properties/SG4103050213/8cee4b9679b2413e9d5932a410e723b1-wtm_l_lis.jpg" class="d-block img-fluid" alt="...">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </button>
+                </div>
+            </div>
+            <div class="media-body" style="margin: 20px;">
+                <h5 class="mt-0 mb-1">Vô Tiền Khoáng Hậu Cho Người Mua Nhà</h5>
+                <p>Gần đây dự án Glory Heights nằm trong Khu đô thị Vinhomes Grand Park (TP. Thủ Đức, TP.HCM) vừa mở bán chính thức và ghi nhận gần 3.000 căn được đặt mua, tỷ lệ hấp thụ hơn 85%. Theo các đơn vị phân phối, người mua chung cư Glory Heights
+                    nhiều phần lớn là nhờ chương trình ưu đãi trả chậm trong 7 năm không lãi suất. Cụ thể, trước thời điểm nhận nhà, khách hàng thanh toán 50% trong vòng 3 năm. Thời điểm nhận nhà, khách hàng thanh toán 45% (lựa chọn vay hoặc không vay).
+                    Nếu vay ngân hàng giải ngân tại thời điểm nhận nhà, miễn và ân hạn nợ gốc 4 năm kể từ ngày giải ngân. Một dự án khác cũng thuộc khu đô thị này là chung cư Masteries Centre Point cũng có chính sách thanh toán 35% nhận nhà trong 3 năm
+                    đầu, qua năm thứ 4 mới đóng tiếp 5% mỗi tháng. Ngoài ra, CĐT còn cho khách hàng áp dụng đồng thời hai chương trình tài trợ lãi suất và cam kết thuê. Nếu khách không sử dụng đồng thời 2 ưu đãi trên sẽ được CĐT chiết khấu 8% trực tiếp
+                    vào giá bán. Còn hai khu chung cư Mizuki Park (Bình Chánh) và chung cư Akari City (Bình Tân) Nam Long đang triển khai tại TP.HCM cũng đưa ra chính sách thanh toán 40%.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="tab7" class="tabcontent">
+        <div class="news-container">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="https://assets.savills.com/properties/SG4000050335/3b4465b62b12406a91507230c996c888-wtm_l_lis.jpg" class="d-block img-fluid" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://assets.savills.com/properties/SG4103050273/3da42ec058cb43258afffdb98fd63f27-wtm_l_lis.jpg" class="d-block img-fluid" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://assets.savills.com/properties/SG4000050335/3b4465b62b12406a91507230c996c888-wtm_l_lis.jpg" class="d-block img-fluid" alt="...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="media-body" style="margin: 20px;">
+                <h5 class="mt-0 mb-1">Chỉ Giới Đường Đỏ Là Gì?</h5>
+                <p>Trước khi tìm hiểu thông tin về chỉ giới đường đỏ Vành đai 4 Hà Nội, hãy cùng giải đáp thắc mắc cho nhiều người về chỉ giới đường đỏ là gì, có nghĩa như thế nào nhé! Chỉ giới đường đỏ là đường ranh giới được xác định trên bản đồ quy hoạch
+                    và trên thực địa, dùng để phân định ranh giới giữa phần đất được xây dựng công trình và phần đất dành cho đường giao thông hoặc công trình hạ tầng kỹ thuật và không gian công cộng khác. Chỉ giới đường đỏ có ý nghĩa đánh dấu rằng phần
+                    đất đó sau này có thể mở rộng hẻm, đường. Người dân không được xây dựng công trình kiên cố trên phần đất đó. Ở phạm vi đô thị, chỉ giới đường đỏ sẽ bao gồm toàn bộ lòng đường, bó vỉa hè và vỉa hè. Một số khái niệm khác có liên quan
+                    đến chỉ giới đường đỏ là chỉ giới xây dựng và khoảng lùi xây dựng. Chỉ giới xây dựng là đường ranh giới được xác định trên bản đồ quy hoạch và thực địa, dùng để phân định ranh giới giữa phần đất được phép xây dựng công trình (cả phần
+                    nổi và phần ngầm) và phần đất lưu không.</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <!-- --------------slide-------------------------- -->
+    <main class="conteudo">
+        <article class="card">
+            <a class="btn" href="https://batdongsan.com.vn/ho-tro-tien-ich/ht-xem-tuoi-xay-nha">
+                <h2 class="text-dark">Xem tuổi xây nhà</h2>
+                <br>
+                <p>"Kinh nghiệm chọn thời điểm lý tưởng để xây nhà cho tương lai!"</p>
+            </a>
+        </article>
+        <article class="card">
+            <a class="btn" href="https://thanhnien.vn/tim-kiem.htm?keywords=b%E1%BA%A5t%20%C4%91%E1%BB%99ng%20s%E1%BA%A3n">
+                <h2 class="text-dark">Báo về bất động sản</h2>
+                <br>
+                <p>"Khám phá Cơ Hội Đầu Tư Bất Động Sản Đa Dạng và Hấp Dẫn"</p>
+            </a>
+        </article>
+        <article class="card">
+            <a class="btn" href="https://batdongsan.com.vn/ho-tro-tien-ich/ht-du-toan-chi-tiet">
+                <h2 class="text-dark">Chi phí làm nhà</h2>
+                <br>
+                <p>"Khám phá Chi Phí Làm Nhà: Lập Kế Hoạch Thông Minh Cho Ngôi Nhà Mơ Ước"</p>
+            </a>
+        </article>
+        <article class="card">
+            <a class="btn" href="https://batdongsan.com.vn/ho-tro-tien-ich/ht-tinh-lai-suat">
+                <h2 class="text-dark">Tính lãi suất</h2>
+                <br>
+                <p>"Hiểu Rõ Lãi Suất: Chìa Khóa Quan Trọng Trong Kế Hoạch Tài Chính Của Bạn"</p>
+            </a>
+        </article>
+    </main>
+    <br>
+    <hr>
+    <!-- ----------------------------------------- -->
+
+    <footer class="footer">
+        <footer class="site-footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h3>About Us</h3>
+                            <p>Tại công ty bất động sản của chúng tôi, chúng tôi tự hào cung cấp các dịch vụ bất động sản chất lượng và chuyên nghiệp. Với nhiều năm kinh nghiệm trong ngành, chúng tôi đã xây dựng được danh tiếng vững chắc và tạo ra nhiều
+                                thành công đáng kể.
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Contact Us</h3>
+                            <ul class="contact-info">
+                                <li><i class="fas fa-map-marker-alt"></i> 123 Street, City, Country</li>
+                                <li><i class="fas fa-phone"></i> +123 456 7890</li>
+                                <li><i class="fas fa-envelope"></i> info@example.com</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>Nhân viên hỗ trợ</h3>
+                            <ul class="social-icons">
+                                <img src="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg" style="border-radius: 50%;">
+                                <hr>
+                                <li><a href="https://www.facebook.com/profile.php?id=100064935605725&mibextid=ZbWKwL"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                                        </svg></a></li>
+                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+                                        </svg></a></li>
+                                <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" />
+                                        </svg></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>&copy; 2023 Real Estate. All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </footer>
+
+    <script type="../js/shopping-cart-app.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

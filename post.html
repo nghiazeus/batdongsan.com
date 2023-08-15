@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Đăng Tin</title>
+    <link rel="stylesheet" href="../cssuser/post.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home/index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Đăng tin</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <h2>Đăng tin</h2>
+        <form method="post" th:action="@{/home/postsuccess}">
+            <label for="title">Tiêu đề:</label><br>
+            <input type="text" id="title" name="title" th:required="required"><br>
+
+            <label for="imagemain">Ảnh chính:</label><br>
+            <input type="file" id="imagemain" name="imagemain" th:required="required"><br>
+
+            <label for="image">Ảnh 1:</label><br>
+            <input type="file" id="imageone" name="imageone" th:required="required"><br>
+
+            <label for="image">Ảnh 2:</label><br>
+            <input type="file" id="imagetwo" name="imagetwo" th:required="required"><br>
+
+            <label for="image">Ảnh 3:</label><br>
+            <input type="file" id="imagethree" name="imagethree" th:required="required"><br>
+
+            <label for="price">Giá:</label><br>
+            <input type="number" id="price" name="price" min="1" step="0.01" th:required="required"><br>
+
+            <label for="createDate">Ngày tạo tin:</label><br>
+            <input type="date" id="createDate" name="createDate" th:required="required"><br>
+
+            <label for="available">Có sẵn:</label>
+            <input type="checkbox" id="available" name="available" class="available"><br>
+
+            <label for="kindHouseId">Loại nhà:</label><br>
+            <select id="house-type-filter" name="kindHouseId">
+                <option disabled selected>Loại nhà</option>
+                <option th:each="kindHouse : ${kindHouses}" th:value="${kindHouse.id}" th:text="${kindHouse.name}">
+                </option>
+            </select>
+
+            <label for="locationId">Địa điểm:</label><br>
+            <select id="locationId" name="locationId">
+        <option disabled selected>Chọn địa điểm</option>
+        <option th:each="location : ${locations}" th:value="${location.id}" th:text="${location.name}"></option>
+    </select><br>
+
+
+            <label for="address">Địa chỉ:</label><br>
+            <input type="text" id="address" name="address" maxlength="100" th:required="required"><br>
+
+            <label for="describe">Mô tả:</label><br>
+            <textarea id="description" name="description" rows="4" cols="50" th:required="required"></textarea><br>
+
+            <button type="submit">Đăng tin</button>
+        </form>
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,905 @@
+@charset "UTF-8";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.navbar-brand img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.logo {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #d85959;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-bar button[type="submit"] {
+    padding: 6px 15px;
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 50px;
+}
+
+nav ul li a.nav-link {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    margin: 0rem;
+}
+
+
+/*-------------------footer -----------------*/
+
+.site-footer {
+    background-color: #000;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer-top {
+    padding-bottom: 30px;
+}
+
+.footer-top h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.footer-top p {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.footer-bottom {
+    background-color: #333;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #fff;
+}
+
+.footer-bottom a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-bottom a:hover {
+    color: #bbb;
+}
+
+
+/* ------------------------- */
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user a.nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.hero {
+    background-image: url("../images/da.jpg");
+    color: #fff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.hero .btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    font-weight: bold;
+}
+
+
+/* 
+.hero1 {
+    background-image: url('https://www.savills.co.uk/_images/istock-648971230-modified-767.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+
+.featured-projects {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.featured-projects h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.featured-projects .project {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.featured-projects .project img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.featured-projects .project h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.featured-projects .project p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer .logo img {
+    width: 100px;
+    height: auto;
+}
+
+.footer .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.footer .nav-links li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer .nav-links li a:hover {
+    text-decoration: underline;
+}
+
+.footer .social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.footer .social-links a:hover {
+    color: #ccc;
+}
+
+
+/* nav top */
+
+.nav-item .nav-link {
+    font-size: 17px;
+    background: transparent;
+    border: none;
+    padding: 1em 1.5em;
+    color: black;
+    position: relative;
+    transition: .5s ease;
+}
+
+.nav-item .nav-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: deepskyblue;
+    transition: .5s ease;
+}
+
+.nav-item .nav-link:hover {
+    color: #1e1e2b;
+    transition-delay: .5s;
+}
+
+.nav-item .nav-link:hover::before {
+    width: 100%;
+}
+
+.nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    background-color: deepskyblue;
+    transition: .4s ease;
+    z-index: -1;
+}
+
+.nav-item .nav-link:hover::after {
+    height: 100%;
+    transition-delay: 0.4s;
+    color: aliceblue;
+}
+
+
+/*  */
+
+
+/* Chat */
+
+.floating-chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+#chat-widget {
+    width: 300px;
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+#chat-header {
+    background-color: #007BFF;
+    padding: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chat-header h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+#chat-close {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#chat-body {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#chat-messages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#chat-footer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+#chat-input {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+#chat-send {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+
+/* --- */
+
+.container h1 {
+    font-family: serif;
+    color: rgb(243, 174, 185);
+}
+
+
+/* Tabs */
+
+.tab-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.tab button {
+    background-color: transparent;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    color: #555;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+    color: #000;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.tabcontent h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.tabcontent p {
+    color: #555;
+    line-height: 1.5;
+}
+
+
+/* tab1 */
+
+
+/* CSS styles for the filter */
+
+.filter-container {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-container h4 {
+    margin: 0 10px 0 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#house-type-filter {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    margin-right: 10px;
+    width: 200px;
+}
+
+.apply-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/* CSS styles for the house list */
+
+.house-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+}
+
+
+/* CSS styles for the active tab */
+
+.tabcontent.active {
+    display: block;
+    text-align: center;
+}
+
+
+/* CSS styles for the tab bar */
+
+.tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.tab button {
+    background-color: transparent;
+    float: none;
+    display: inline-block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    color: #555;
+    white-space: nowrap;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+    color: #000;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+
+/*  */
+
+
+/* fillter giá nhà */
+
+.filter-range-wrap {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.range-slider {
+    flex: 1;
+    margin-right: 10px;
+    height: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.price-input {
+    display: flex;
+}
+
+.price-input input {
+    width: 60px;
+    text-align: center;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+
+/*  */
+
+
+/*  Tab tin tức*/
+
+
+/* Định dạng phần Tin tức */
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    padding: 20px;
+}
+
+.news-item {
+    width: 50%;
+    padding: 10px;
+}
+
+.news-item img {
+    width: 100%;
+    height: auto;
+}
+
+
+/* Hiệu ứng tab khi được chọn */
+
+.tabcontent {
+    display: none;
+}
+
+.tablinks {
+    background-color: #f1f1f1;
+    color: black;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.tablinks.active {
+    background-color: #ccc;
+}
+
+
+/*  slide*/
+
+.carousel-container {
+    max-width: 600px;
+    /* Giới hạn chiều rộng của carousel */
+    margin: 0 auto;
+    /* Căn giữa carousel */
+}
+
+
+/* menu */
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user p {
+    margin: 0;
+    align-items: center;
+}
+
+.username-text {
+    color: aliceblue;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.bi-person-circle {
+    margin-right: 5px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ffc107;
+    /* Change this to your desired link color */
+    margin-left: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #ff9800;
+    /* Change this to your desired link color on hover */
+}
+
+
+/* heart */
+
+
+/* like */
+
+a>.con-like {
+    --red: rgb(255, 50, 100);
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: 400px;
+    bottom: 26px;
+}
+
+a>.con-like .like {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 20;
+    cursor: pointer;
+}
+
+a>.con-like .checkmark {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a>.con-like .outline,
+a>.con-like .filled {
+    fill: var(--red);
+    position: absolute;
+}
+
+a>.con-like .filled {
+    animation: kfr-filled 0.5s;
+    display: none;
+}
+
+a>.con-like .celebrate {
+    position: absolute;
+    animation: kfr-celebrate 0.5s;
+    animation-fill-mode: forwards;
+    display: none;
+}
+
+a .con-like .poly {
+    stroke: var(--red);
+    fill: var(--red);
+}
+
+a .con-like .like:checked~.checkmark .filled {
+    display: block
+}
+
+a .con-like .like:checked~.checkmark .celebrate {
+    display: block
+}
+
+@keyframes kfr-filled {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes kfr-celebrate {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Đổi màu sắc biểu tượng trái tim thành đỏ khi được "thích" */
+ .con-like .like:checked ~ .checkmark .outline,
+ .con-like .like:checked ~ .checkmark .filled {
+    fill: var(--red);
+}
+
+
+/*  slide*/
+
+
+/* Định vị số lượng bên trong biểu tượng */
+
+.filter-widget {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.filter-widget .fw-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.filter-widget form {
+    margin-top: 20px;
+}
+
+.filter-range-wrap {
+    align-items: center;
+    display: block;
+}
+
+.range-slider {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.price-input {
+    align-items: center;
+    display: inline-flex;
+}
+
+.price-input input {
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.price-range {
+    position: relative;
+    height: 6px;
+    background-color: #ddd;
+}
+
+.filter-btn {
+    padding: 10px 20px;
+    background-color: #ff4e50;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: #ff647d;
+}
+
+.filter-btn:active {
+    transform: scale(0.95);
+}
+
+.price-slider {
+    margin-top: 10px;
+}
+
+.price-input {
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.filter-range-wrap {
+    margin-top: 10px;
+}
+
+.price-input {
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.range-slider {
+    width: 100%;
+}
+
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: default;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+    top: -0.5em;
+    margin-left: -0.6em;
+}
+
+.ui-slider-vertical .ui-slider-handle {
+    left: -0.5em;
+    margin-left: 0;
+    margin-bottom: -0.6em;
+}
+
+
+/* ---------------filter--------- */

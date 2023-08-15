@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bất động sản</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../cssuser/index.css?ver=1.0">
+
+    <base href="${pageContext.servletContext.contextPath}/">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <a href="http://jquery.com/"></a>
+    <script src="đường-dẫn-đến-jquery-autocomplete.js"></script>
+    <!-- Thư viện jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <style>
+        @charset "UTF-8";
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        header {
+            background-color: #333;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+        }
+        
+        .navbar-brand img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        
+        .logo {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            color: #d85959;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-bar input[type="text"] {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        
+        .search-bar button[type="submit"] {
+            padding: 6px 15px;
+            background-color: #fff;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-right: 50px;
+        }
+        
+        nav ul li a.nav-link {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            margin: 0rem;
+        }
+        /*-------------------footer -----------------*/
+        
+        .site-footer {
+            background-color: #000;
+            color: #fff;
+            padding: 40px 0;
+        }
+        
+        .footer-top {
+            padding-bottom: 30px;
+        }
+        
+        .footer-top h3 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        .footer-top p {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .contact-info li {
+            margin-bottom: 10px;
+        }
+        
+        .social-icons li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-bottom {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            color: #fff;
+        }
+        
+        .footer-bottom a {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .footer-bottom a:hover {
+            color: #bbb;
+        }
+        /* ------------------------- */
+        
+        .user {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user a.nav-link {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        
+        .hero {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+        
+        .hero .btn-primary {
+            display: inline-block;
+            padding: 12px 30px;
+            font-weight: bold;
+        }
+        /* 
+.hero1 {
+    background-image: url('https://www.savills.co.uk/_images/istock-648971230-modified-767.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+        
+        .featured-projects {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .featured-projects h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .featured-projects .project {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .featured-projects .project img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        .featured-projects .project h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .featured-projects .project p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer .logo img {
+            width: 100px;
+            height: auto;
+        }
+        
+        .footer .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .footer .nav-links li {
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .footer .nav-links li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .footer .nav-links li a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer .social-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        
+        .footer .social-links a:hover {
+            color: #ccc;
+        }
+        /* nav top */
+        
+        .nav-item .nav-link {
+            font-size: 17px;
+            background: transparent;
+            border: none;
+            padding: 1em 1.5em;
+            color: black;
+            position: relative;
+            transition: .5s ease;
+        }
+        
+        .nav-item .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background-color: deepskyblue;
+            transition: .5s ease;
+        }
+        
+        .nav-item .nav-link:hover {
+            color: #1e1e2b;
+            transition-delay: .5s;
+        }
+        
+        .nav-item .nav-link:hover::before {
+            width: 100%;
+        }
+        
+        .nav-item .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 0;
+            width: 100%;
+            background-color: deepskyblue;
+            transition: .4s ease;
+            z-index: -1;
+        }
+        
+        .nav-item .nav-link:hover::after {
+            height: 100%;
+            transition-delay: 0.4s;
+            color: aliceblue;
+        }
+        /*  */
+        /* Chat */
+        
+        .floating-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .visible {
+            display: block;
+        }
+        
+        #chat-widget {
+            width: 300px;
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        
+        #chat-header {
+            background-color: #007BFF;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #chat-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        #chat-close {
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        #chat-body {
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        #chat-messages {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        #chat-footer {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+        }
+        
+        #chat-input {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        #chat-send {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        /* --- */
+        
+        .container h1 {
+            font-family: serif;
+            color: lightpink;
+        }
+        /* Tabs */
+        
+        .tab-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tab {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .tab button {
+            background-color: transparent;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        
+        .tab button.active {
+            background-color: #ccc;
+            color: #000;
+        }
+        
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        
+        .tabcontent h4 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .tabcontent p {
+            color: #555;
+            line-height: 1.5;
+        }
+        /* tab1 */
+        /* CSS styles for the filter */
+        
+        .filter-container {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter-container h4 {
+            margin: 0 10px 0 0;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        #house-type-filter {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            margin-right: 10px;
+            width: 200px;
+        }
+        
+        .apply-button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        /* CSS styles for the house list */
+        
+        .house-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+        }
+        /* CSS styles for the active tab */
+        
+        .tabcontent.active {
+            display: block;
+            text-align: center;
+        }
+        /* CSS styles for the tab bar */
+        
+        .tab {
+            overflow: hidden;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        
+        .tab button {
+            background-color: transparent;
+            float: none;
+            display: inline-block;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            color: #555;
+            white-space: nowrap;
+        }
+        
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        
+        .tab button.active {
+            background-color: #ccc;
+            color: #000;
+        }
+        
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+        /*  */
+        /* fillter giá nhà */
+        
+        .filter-range-wrap {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .range-slider {
+            flex: 1;
+            margin-right: 10px;
+            height: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        
+        .price-input {
+            display: flex;
+        }
+        
+        .price-input input {
+            width: 60px;
+            text-align: center;
+        }
+        
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        /*  */
+        /*  Tab tin tức*/
+        /* Định dạng phần Tin tức */
+        
+        .news-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+            padding: 20px;
+        }
+        
+        .news-item {
+            width: 50%;
+            padding: 10px;
+        }
+        
+        .news-item img {
+            width: 100%;
+            height: auto;
+        }
+        /* Hiệu ứng tab khi được chọn */
+        
+        .tabcontent {
+            display: none;
+        }
+        
+        .tablinks {
+            background-color: #f1f1f1;
+            color: black;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .tablinks.active {
+            background-color: #ccc;
+        }
+        /*  slide*/
+        
+        .carousel-container {
+            max-width: 600px;
+            /* Giới hạn chiều rộng của carousel */
+            margin: 0 auto;
+            /* Căn giữa carousel */
+        }
+        /* menu */
+        
+        .user {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user p {
+            margin: 0;
+            align-items: center;
+        }
+        
+        .username-text {
+            color: aliceblue;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        .bi-person-circle {
+            margin-right: 5px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #ffc107;
+            /* Change this to your desired link color */
+            margin-left: 10px;
+            transition: color 0.3s ease-in-out;
+        }
+        
+        .nav-link:hover {
+            color: #ff9800;
+            /* Change this to your desired link color on hover */
+        }
+        /* heart */
+        /* CSS detail */
+        
+        .preview-pic {
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-height: 300px;
+            /* Điều chỉnh kích thước tối đa cho khung hình */
+            position: relative;
+            /* Thêm thuộc tính này */
+            overflow: hidden;
+            /* Thêm thuộc tính này để ẩn nội dung ảnh vượt ra khỏi khung hình */
+        }
+        
+        .preview-pic img {
+            width: 100%;
+            /* Đảm bảo ảnh rộng 100% theo khung hình */
+            height: 100%;
+            /* Đảm bảo ảnh cao 100% theo khung hình */
+            object-fit: cover;
+            /* Đảm bảo ảnh không bị biến dạng */
+        }
+        
+        .preview {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
+        
+        @media screen and (max-width: 996px) {
+            .preview {
+                margin-bottom: 20px;
+            }
+        }
+        /* .preview-pic {
+            -webkit-box-flex: 1;
+            -webkit-flex-grow: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            max-height: 300px;
+        } */
+        
+        .preview-thumbnail.nav-tabs {
+            border: none;
+            margin-top: 15px;
+        }
+        
+        .preview-thumbnail.nav-tabs li {
+            width: 18%;
+            margin-right: 2.5%;
+        }
+        
+        .preview-thumbnail.nav-tabs li img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        .preview-thumbnail.nav-tabs li a {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .preview-thumbnail.nav-tabs li:last-of-type {
+            margin-right: 0;
+        }
+        
+        .tab-content {
+            overflow: overlay;
+        }
+        
+        .tab-content img {
+            width: 100%;
+            -webkit-animation-name: opacity;
+            animation-name: opacity;
+            -webkit-animation-duration: .3s;
+            animation-duration: .3s;
+        }
+        
+        @-webkit-keyframes opacity {
+            0% {
+                opacity: 0;
+                -webkit-transform: scale(3);
+                transform: scale(3);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes opacity {
+            0% {
+                opacity: 0;
+                -webkit-transform: scale(3);
+                transform: scale(3);
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <!--menu-->
+        <div th:replace="/user/layout/_menu.html"></div>
+    </header>
+    <br>
+    <hr>
+    <br>
+    <!-- 
+    <section class="hero">
+        <div th:replace="/user/layout/_filter.html"></div>
+    </section> -->
+
+
+
+    <section class="featured-projects">
+        <div th:replace="/user/layout/_productdetail.html"></div>
+    </section>
+
+    <!-- Mã HTML và CSS cho chức năng nhắn tin -->
+    <button id="open-chat" class="floating-chat-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            fill="currentColor" class="bi bi-chat-quote-fill" viewBox="0 0 16 16">
+            <path
+                d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM7.194 6.766a1.688 1.688 0 0 0-.227-.272 1.467 1.467 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 5.734 6C4.776 6 4 6.746 4 7.667c0 .92.776 1.666 1.734 1.666.343 0 .662-.095.931-.26-.137.389-.39.804-.81 1.22a.405.405 0 0 0 .011.59c.173.16.447.155.614-.01 1.334-1.329 1.37-2.758.941-3.706a2.461 2.461 0 0 0-.227-.4zM11 9.073c-.136.389-.39.804-.81 1.22a.405.405 0 0 0 .012.59c.172.16.446.155.613-.01 1.334-1.329 1.37-2.758.942-3.706a2.466 2.466 0 0 0-.228-.4 1.686 1.686 0 0 0-.227-.273 1.466 1.466 0 0 0-.469-.324l-.008-.004A1.785 1.785 0 0 0 10.07 6c-.957 0-1.734.746-1.734 1.667 0 .92.777 1.666 1.734 1.666.343 0 .662-.095.931-.26z" />
+        </svg> Chat
+    </button>
+
+    <div id="chat-widget" class="hidden">
+        <div id="chat-header">
+            <h3>Chat</h3>
+            <button id="chat-close"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                    class="bi bi-x-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path
+                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                </svg></button>
+        </div>
+        <div id="chat-body">
+            <ul id="chat-messages"></ul>
+        </div>
+        <div id="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type your message" />
+            <button id="chat-send">Gửi</button>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>&copy; 2023 Real Estate. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </footer>
+
+    </footer>
+
+    <script src="../js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+
+</html>

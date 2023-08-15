@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SHOES_SHOP</title>
+    <base href="${pageContext.servletContext.contextPath}/">
+    <link rel="stylesheet" href="/cssadmin/admin.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .profile-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body ng-app="app" ng-controller="ctrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                <div class="row pt-md-5 mt-md-3 mb-5">
+                    <div class="col">
+                        <h2 class="text-muted">
+                            Authorizing
+                        </h2>
+
+                        <hr>
+
+                        <div class="table-responsive">
+                            <table ng-if="db" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th ng-repeat="role in db.roles">{{role.name}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="acc in db.accounts">
+                                        <th>{{acc.username}}</th>
+                                        <th ng-repeat="role in db.roles">
+                                            <input type="checkbox" ng-checked="index_of(acc.username, role.id) >= 0" ng-click="update(acc.username, role.id)">
+                                        </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var app = angular.module("app", []);
+        app.controller("ctrl", function($scope, $http) {
+            $http.get("/rest/authority").then(resp => {
+                $scope.db = resp.data;
+            })
+            $scope.index_of = function(username, role) {
+                return $scope.db.authority
+                    .findIndex(a => a.account.username == username && a.role.id == role);
+            }
+            $scope.update = function(username, role) {
+                var index = $scope.index_of(username, role);
+                if (index >= 0) {
+                    var id = $scope.db.authority[index].id;
+                    $http.delete('/rest/authority/${id}').then(resp => {
+                        $scope.db.authority.splice(index, 1);
+                    })
+                } else {
+                    var authority = {
+                        account: {
+                            username: username
+                        },
+                        role: {
+                            id: role
+                        }
+                    };
+                    $http.post('/rest/authority/', authority).then(resp => {
+                        $scope.db.authority.push(resp.data);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

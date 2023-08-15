@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Account Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Global Styles */
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #aae2f1;
+            margin: 0;
+            padding: 0;
+        }
+        /* Account Profile Page */
+        
+        .profile-container {
+            max-width: 500px;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .profile-info {
+            margin-top: 20px;
+        }
+        
+        .profile-info strong {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .profile-info a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .profile-info a:hover {
+            background-color: #0056b3;
+        }
+        /* Responsive design for smaller screens */
+    </style>
+</head>
+
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home/index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="profile-container">
+            <h3 class="text-primary">Account Profile</h3>
+            <div class="profile-info">
+                <p><strong>Username:</strong> [[${account.username}]]</p>
+                <p><strong>Full Name:</strong> [[${account.fullname}]]</p>
+                <p><strong>Email:</strong> [[${account.email}]]</p>
+                <p><strong>Phone:</strong> [[${account.phone}]]</p>
+                <br>
+                <a th:href="@{/editProfile/{username}(username=${account.username})}" class="btn btn-primary">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

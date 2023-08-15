@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="dynamic(main)">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../cssuser/login.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home/index">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Đăng nhập</li>
+        </ol>
+    </nav>
+    <div class="login-reg-panel">
+        <div class="login-info-box">
+            <h2>Bạn đã có tài khoản?</h2>
+            <p>Đăng nhập ngay</p>
+            <label id="label-register" for="log-reg-show">Đăng nhập</label>
+            <input type="radio" name="active-log-panel" id="log-reg-show" checked="checked">
+        </div>
+
+        <div class="register-info-box">
+            <h2>Bạn chưa có tài khoản?</h2>
+            <p>Đăng ký ngay</p>
+            <a href="/home/register" id="label-login" for="log-login-show" style="text-decoration: none;">Đăng ký</a>
+            <input type="radio" name="active-log-panel" id="log-login-show">
+        </div>
+
+        <div class="white-panel">
+            <form th:action="@{/security/login}" method="post" class="login-show">
+                <h2>Đăng nhập</h2>
+                <input name="username" type="text" placeholder="username">
+                <input name="password" type="password" placeholder="Password">
+                <input class="btn btn-outline-primary" type="submit" value="Đăng nhập"><br>
+                <br>
+                <i th:utext="${message}"></i>
+                <br>
+                <hr>
+
+                <a href="/oauth2/authorization/google" class="btn" style="padding: 25px;">
+                    <img src="../images/logogg.png" width="20px" height="20px"> google</a>
+                <a href="#" class="btn">
+                    <img src="../images/Facebook_Logo_(2019).png" width="20px" height="20px"> Facebook</a>
+            <br>
+            <a href="#">Quên mật khẩu?</a>
+            </form>
+            
+            <div class="register-show">
+                <h2>Đăng ký</h2>
+                <input type="text" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Confirm Password">
+                <input type="button" value="Đăng ký">
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/login.js"></script>
+</body>
+
+</html>

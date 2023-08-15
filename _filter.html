@@ -1,0 +1,132 @@
+<div class="container">
+    <h1 class="slide">Khám phá và tìm kiếm những ngôi nhà hoàn hảo dành cho bạn!</h1>
+</div>
+
+<div class="tab-container">
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'tab1')">Loại
+            nhà</button>
+        <button class="tablinks" onclick="openTab(event, 'tab2')">Tỉnh/Thành
+            phố</button>
+        <button class="tablinks" onclick="openTab(event, 'tab3')">Giá
+            nhà</button>
+    </div>
+
+    <div id="tab1" class="tabcontent active">
+        <h4>Nhà đất bán</h4>
+        <hr>
+        <div class="filter-container">
+            <h4>Chọn loại nhà:</h4>
+
+            <div class="dropdown">
+                <button class="btn btn-black dropdown-toggle" type="button" id="kindHouseDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Loại nhà
+                </button>
+                <div class="dropdown-menu" aria-labelledby="kindHouseDropdown">
+                    <a class="dropdown-item" href="/home/search/loai?kindhouseId=KH1">Nhà đất</a>
+                    <a class="dropdown-item" href="/home/search/loai?kindhouseId=KH2">Chung cư</a>
+                    <a class="dropdown-item" href="/home/search/loai?kindhouseId=KH3">Căn hộ</a>
+                    <a class="dropdown-item" href="/home/search/loai?kindhouseId=KH4">Biệt thự</a>
+                    <a class="dropdown-item" href="/home/search/loai?kindhouseId=KH5">Nhà mặt phố</a>
+                </div>
+            </div>
+
+            <div class="ml-3">
+                <button class="btn" type="submit"></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab2" class="tabcontent">
+        <h4>Nhà đất bán</h4>
+        <hr>
+        <div class="filter-container">
+            <h4>Chọn Tỉnh/Thành phố:</h4>
+            <div class="dropdown">
+                <button class="btn btn-black dropdown-toggle" type="button" id="locationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tỉnh/Thành
+                </button>
+                <div class="dropdown-menu" aria-labelledby="locationDropdown">
+                    <a class="dropdown-item" href="/home/search/location?locationId=t1">TP.HCM</a>
+                    <a class="dropdown-item" href="/home/search/location?locationId=t2">Hà Nội</a>
+                    <a class="dropdown-item" href="/home/search/location?locationId=t3">Cần Thơ</a>
+                    <a class="dropdown-item" href="/home/search/location?locationId=t4">Long An</a>
+                    <a class="dropdown-item" href="/home/search/location?locationId=t5">Bình Phước</a>
+                </div>
+            </div>
+            <div class="ml-3">
+                <button class="btn" type="submit"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  ----------------------------------------------------------------------------- -->
+
+    <div id="tab3" class="tabcontent">
+        <h4>Chọn giá nhà</h4>
+        <form action="/home/search/price" method="post">
+            <div class="filter-range-wrap">
+                <div class="range-slider"></div>
+                <div class="form-group price-input">
+                    <input name="minPrice" class="form-control" value="0" placeholder="Min Price">
+                    <input name="maxPrice" class="form-control" value="2000" placeholder="Max Price">
+                </div>
+            </div>
+            <button class="filter-btn" style="border: none">Filter</button>
+        </form>
+    </div>
+
+
+    <!-- ------------------------------------------------------------------------------ -->
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var searchLinks = document.querySelectorAll(".search-link");
+        var searchResultsContainer = document.getElementById("searchResultsContainer");
+
+        searchLinks.forEach(function(link) {
+            link.addEventListener("click", function(event) {
+                event.preventDefault(); // Ngăn chặn tải lại trang
+
+                var href = link.getAttribute("href");
+                fetch(href)
+                    .then(response => response.text())
+                    .then(data => {
+                        searchResultsContainer.innerHTML = data;
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                    });
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var slider = document.querySelector('.range-slider');
+        var minPriceInput = document.querySelector('input[name="minPrice"]');
+        var maxPriceInput = document.querySelector('input[name="maxPrice"]');
+
+        noUiSlider.create(slider, {
+            start: [0, 2000],
+            connect: true,
+            range: {
+                'min': 0,
+                'max': 2000
+            }
+        });
+
+        slider.noUiSlider.on('update', function(values, handle) {
+            var value = values[handle];
+            if (handle === 0) {
+                minPriceInput.value = value;
+            } else {
+                maxPriceInput.value = value;
+            }
+        });
+    });
+</script>

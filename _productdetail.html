@@ -1,0 +1,124 @@
+<div class="container">
+    <h2>Bất động sản dành cho bạn</h2>
+    <div class="product-list">
+        <div class="row">
+            <div th:object="${product}" class="col-md-9">
+                <div class="project">
+                    <div class="preview">
+                        <div class="preview-pic tab-content">
+                            <!-- Hình ảnh của sản phẩm -->
+                            <div class="tab-pane" id="pic-1">
+                                <img th:src="@{|/images/${product.imagemain}|}" style="max-width: 100%; max-height: 100%;">
+                            </div>
+                            <!-- Các hình ảnh khác của sản phẩm -->
+                            <div class="tab-pane" id="pic-2">
+                                <img th:src="@{|/images/${product.imageone}|}" style="max-width: 100%; max-height: 100%;">
+                            </div>
+                            <div class="tab-pane active" id="pic-3">
+                                <img th:src="@{|/images/${product.imagetwo}|}" style="max-width: 100%; max-height: 100%;">
+                            </div>
+                            <div class="tab-pane" id="pic-4">
+                                <img th:src="@{|/images/${product.imagethree}|}" style="max-width: 100%; max-height: 100%;">
+                            </div>
+                        </div>
+                        <!-- Thumnail hình ảnh -->
+                        <ul class="preview-thumbnail nav nav-tabs">
+                            <li class="active">
+                                <a data-target="#pic-1" data-toggle="tab" class=""> <img th:src="@{|/images/${product.imagemain}|}" width="100" height="100px">
+                                </a>
+                            </li>
+                            <li class="">
+                                <a data-target="#pic-2" data-toggle="tab" class=""> <img th:src="@{|/images/${product.imageone}|}" width="100" height="100px">
+                                </a>
+                            </li>
+                            <li class="">
+                                <a data-target="#pic-3" data-toggle="tab" class=""> <img th:src="@{|/images/${product.imagetwo}|}" width="100" height="100px">
+                                </a>
+                            </li>
+                            <li class="">
+                                <a data-target="#pic-4" data-toggle="tab" class=""> <img th:src="@{|/images/${product.imagethree}|}" width="100" height="100px">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <!-- Tiêu đề và thông tin của sản phẩm -->
+                    <div class="body-title" style="text-align: left;">
+                        <h2 th:text="${product.title}" style="font-weight: bold;"></h2>
+                    </div>
+                    <div>
+                        <div th:text="${product.address}" style="font-weight: normal !important; font-size: 13px; color: black; text-align: left;">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="body-all" style="display: flex">
+                        <div style="font-size: 15px; color: #999;">
+                            Giá / <small><sup>Tỷ</sup></small>
+                            <div th:text="${product.price}" style="font-weight: normal !important; font-size: 18px; color: black;"></div>
+                        </div>
+                        <div style="padding-left: 60px; font-size: 15px; color: #999;">
+                            Ngày đăng
+                            <div th:text="${product.createDate}" style="font-weight: normal !important; font-size: 18px; color: black;"></div>
+                        </div>
+                        <div style="padding-left: 60px; font-size: 15px; color: #999;">
+                            Loại
+                            <div th:text="${product.kindhouse.name}" style="font-weight: normal !important; font-size: 18px; color: black;"></div>
+                        </div>
+                        <div style="padding-left: 60px; font-size: 15px; color: #999;">
+                            Lượt xem
+                            <div th:text="${product.viewcount}" style="font-weight: normal !important; font-size: 18px; color: black;"></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- Các phần khác của trang -->
+                    <!-- Phần hiển thị cùng loại -->
+                    <div class="cung-loai">
+                        <h3>Cùng loại</h3>
+                        <ul class="list-group">
+                            <li th:each="p: ${product.kindhouse.product}" class="list-group-item">
+                                <a class="btn text-info" th:href="@{|/home/productdetail/${p.id}|}" th:text="${p.title}"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- comment -->
+            <!-- ---------------- -->
+            <!-- Thông tin tài khoản và liên hệ -->
+            <div class="account col-md-3" style="padding: 19px;">
+                <div th:object="${product}" style="border: 1px solid #F2F2F2; background-color: aliceblue; padding: 5px;">
+                    <div class="body-all-account" style="padding: 15px;">
+                        <div class="image-user">
+                            <img src="https://png.pngtree.com/png-vector/20190623/ourlarge/pngtree-accountavataruser--flat-color-icon--vector-icon-banner-templ-png-image_1491720.jpg" style="border-radius: 50%; max-width: 50%;">
+                        </div>
+                        <div>
+                            <span style="font-size: 13px; color: #999;">Được đăng bởi</span>
+                        </div>
+                        <div class="body-title-account">
+                            <h2 th:text="${product.accounts.username}" style="font-weight: bold;"></h2>
+                        </div>
+                        <div style="color: #fff; background: #009BA1; border: 1px solid #009BA1; font-size: 14px; line-height: 20px; font-weight: normal !important; letter-spacing: -.2px; padding: 13px 15px; border-radius: 8px; display: inline-flex;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+									d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                            </svg> :
+                            <div th:text="${product.accounts.phone}"></div>
+                        </div>
+                        <div style="color: #2C2C2C; margin-top: 15px; background: #fff; border: solid 1px #ccc; font-size: 14px; line-height: 20px; font-weight: normal !important; letter-spacing: -.2px; padding: 13px 15px; border-radius: 8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                                <path
+									d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                            </svg>
+                            <button class="btn">Gửi mail</button>
+                        </div>
+                        <div style="color: #2C2C2C; margin-top: 15px; background: #fff; border: solid 1px #ccc; font-size: 14px; line-height: 20px; font-weight: normal !important; letter-spacing: -.2px; padding: 13px 15px; border-radius: 8px;">
+                            <button class="btn">Yêu cầu liên hệ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
